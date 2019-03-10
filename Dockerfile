@@ -4,14 +4,24 @@ WORKDIR /ansible
 
 RUN apk add --no-cache --upgrade \
         curl \
-        ansible \ 
-    # Update pip and install openshift
+        openssl \
+        ca-certificates \
+        python3 \
+    && apk add --no-cache --upgrade --virtual build-dependencies \
+        python3-dev \
+        libffi-dev \
+        openssl-dev \
+        build-base \
     && python3 -m ensurepip \
     && pip3 install --upgrade --no-cache-dir --progress-bar off \
         pip \
-        openshift \
-        # speeds up decrypting/encrypting variables
+        cffi \
+    && pip3 install --upgrade --no-cache-dir --progress-bar off \
         cryptography \
+        ansible \
+        # Openshift is a required of the k8s Ansible module
+        openshift \
+    && apk del build-dependencies \
     # Add symlinks for pip3 and pyton3 to pip and python
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
     && if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python3 /usr/bin/python; fi \
