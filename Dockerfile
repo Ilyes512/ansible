@@ -18,6 +18,8 @@ RUN apk add --no-cache --upgrade \
         cffi \
     && pip3 install --upgrade --no-cache-dir --progress-bar off \
         cryptography \
+        # For more Ansible password_hash() support (ie bcrypt)
+        passlib \
         ansible \
         # Openshift is a required of the k8s Ansible module
         openshift \
