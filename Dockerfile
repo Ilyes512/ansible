@@ -21,7 +21,7 @@ RUN apk add --no-cache --upgrade \
         # For more Ansible password_hash() support (ie bcrypt)
         passlib \
         ansible \
-        # Openshift is a required of the k8s Ansible module
+        # Openshift is a requirement of the k8s Ansible module
         openshift \
     && apk del build-dependencies \
     # Add symlinks for pip3 and pyton3 to pip and python
