@@ -7,6 +7,7 @@ RUN apk add --no-cache --upgrade \
         openssl \
         ca-certificates \
         python3 \
+        git \
     && apk add --no-cache --upgrade --virtual build-dependencies \
         python3-dev \
         libffi-dev \
