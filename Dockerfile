@@ -23,6 +23,7 @@ RUN apk add --no-cache --upgrade \
         cryptography \
         # For more Ansible password_hash() support (ie bcrypt)
         passlib \
+        bcrypt \
         ansible \
         # Openshift is a requirement of the k8s Ansible module
         openshift \
