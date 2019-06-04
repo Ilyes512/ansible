@@ -1,0 +1,66 @@
+#!/usr/bin/env sh
+
+seperator() {
+    printf "\n---\n\n"
+}
+
+encrypt() {
+    for vaultfile in `find . -name '*.vault' -o -name '*.vault.yml' -o -name 'vault.yml'`; do
+        if [ ! -f "$vaultfile.enc" ]; then
+            seperator
+            printf "No \"%s.enc\" file found...\n" $vaultfile
+            printf "Encrypting %s\n" $vaultfile
+            ansible-vault encrypt $vaultfile
+
+            continue
+        fi
+
+        local preform=`ansible-vault view $vaultfile.enc`
+        local postform=`cat $vaultfile`
+
+        if [ "$preform" == "$postform" ]; then
+            seperator
+            printf "Restoring unchanged file %s\n" $vaultfile
+            mv -f $vaultfile.enc $vaultfile
+        else
+            rm $vaultfile.enc
+            seperator
+            printf "Encrypting %s\n" $vaultfile
+            ansible-vault encrypt $vaultfile
+        fi
+    done
+}
+
+decrypt() {
+    for vaultfile in `find . -name '*.vault' -o -name '*.vault.yml' -o -name 'vault.yml'`; do
+        if [ -f "$vaultfile.enc" ]; then
+            seperator
+            printf "Vaultfile \"%s\" already seems to have a \"%s.enc\" file...\n" $vaultfile ${vaultfile##*/}
+            printf "Skipping...\n\nIt most likely is already decrypted.\nOtherwise remove \"%s.enc\" and run this command again.\n" $vaultfile
+        else
+            seperator
+            printf "Decrypting %s\n" $vaultfile
+            cp $vaultfile $vaultfile.enc
+            ansible-vault decrypt $vaultfile
+        fi
+    done
+}
+
+ipvault () {
+case "$1" in
+    encrypt)
+        encrypt
+    ;;
+
+    decrypt)
+        decrypt
+        ;;
+
+    *)
+        printf >&2 "\033[31mERROR:\033[m\n\tUsage: ${0##*/} {encrypt|decrypt}\n"
+        exit 1
+        ;;
+esac
+}
+
+ipvault $@

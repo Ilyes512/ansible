@@ -2,8 +2,6 @@ FROM alpine:3.9
 
 WORKDIR /ansible
 
-COPY files /
-
 RUN apk add --no-cache --upgrade \
         curl \
         openssl \
@@ -34,5 +32,7 @@ RUN apk add --no-cache --upgrade \
     # Get kubectl
     && curl -fSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
     && chmod +x /usr/local/bin/kubectl
+
+COPY files /
 
 CMD ["ansible", "--version"]
