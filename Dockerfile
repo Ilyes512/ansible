@@ -23,6 +23,7 @@ RUN apk add --no-cache --upgrade \
         passlib \
         bcrypt \
         ansible \
+        mazer \
         # Openshift is a requirement of the k8s Ansible module
         openshift \
     && apk del build-dependencies \
