@@ -36,4 +36,5 @@ RUN apk add --no-cache --upgrade \
 
 COPY files /
 
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["ansible", "--version"]
