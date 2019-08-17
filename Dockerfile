@@ -2,6 +2,8 @@ FROM alpine:3.10.1
 
 WORKDIR /ansible
 
+ENV KUBECTL_VERSION v1.15.2
+
 RUN apk add --no-cache --upgrade \
         curl \
         openssl \
@@ -31,7 +33,7 @@ RUN apk add --no-cache --upgrade \
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
     && if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python3 /usr/bin/python; fi \
     # Get kubectl
-    && curl -fSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+    && curl -fsSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl \
     && chmod +x /usr/local/bin/kubectl
 
 COPY files /
