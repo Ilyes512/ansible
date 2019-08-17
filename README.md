@@ -7,16 +7,34 @@
 
 A image based on Alpine with Ansible and Kubectl.
 
-## Info
+## Pulling the image
 
-Workdir: `/ansible`
+```
+docker pull ilyes512/ansiblek8s:latest
+```
 
-### ENV variables:
+## Building the docker image(s)
+
+```
+docker build --tag ilyes512/ansiblek8s:fromsource .
+```
+
+## Misc
+
+**Workdir**: `/ansible`
+
+**Environment variables**:
 
 `KUBECONFIG_OVERRIDE`: If this env variable is set, it will put the variable contents a (new) file at `/root/.kube/context-override`. It then set's the `KUBECONFIG` env variable to `/root/.kube/context-override`.
 
-Example:
+<details><summary>Example:</summary>
 
 ```bash
 docker run --rm --tty --env KUBECONFIG_OVERRIDE="`kind get kubeconfig --internal`" ilyes512/ansiblek8s kubectl get nodes
 ```
+
+Quote:
+> kind is a tool for running local Kubernetes clusters using Docker container "nodes".
+
+For more info see: https://github.com/kubernetes-sigs/kind
+</details>
