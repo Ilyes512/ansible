@@ -29,6 +29,8 @@ RUN apk add --no-cache --upgrade \
         mazer \
         # openshift is a requirement of the k8s Ansible module
         openshift \
+        # needed for Ansible k8s module's validate support
+        kubernetes-validate \
     && apk del build-dependencies \
     # add symlinks for pip3 and pyton3 to pip and python
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
