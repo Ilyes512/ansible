@@ -6,13 +6,13 @@ ENV HOME /home
 ENV KUBECTL_VERSION v1.16.1
 ENV KUBECTX_VERSION v0.7.0
 
-RUN apk add --no-cache --upgrade \
+RUN apk add --no-cache --upgrade --no-progress \
         curl \
         openssl \
         ca-certificates \
         python3 \
         git \
-    && apk add --no-cache --upgrade --virtual build-dependencies \
+    && apk add --no-cache --upgrade --no-progress --virtual build-dependencies \
         python3-dev \
         libffi-dev \
         openssl-dev \
