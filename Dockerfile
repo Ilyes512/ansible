@@ -18,10 +18,10 @@ RUN apk add --no-cache --upgrade --no-progress \
         openssl-dev \
         build-base \
     && python3 -m ensurepip \
-    && pip3 install --upgrade --no-cache-dir --progress-bar off \
+    && python3 -m pip install --upgrade --no-cache-dir --progress-bar off \
         pip \
+    && python3 -m pip install --upgrade --no-cache-dir --progress-bar off \
         cffi \
-    && pip3 install --upgrade --no-cache-dir --progress-bar off \
         cryptography \
         # for more Ansible password_hash() support (ie bcrypt)
         passlib \
