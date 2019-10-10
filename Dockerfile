@@ -3,8 +3,8 @@ FROM alpine:3.10.2
 WORKDIR /ansible
 
 ENV HOME /home
-ENV KUBECTL_VERSION v1.15.2
-ENV KUBECTX_VERSION v0.6.3
+ENV KUBECTL_VERSION v1.16.1
+ENV KUBECTX_VERSION v0.7.0
 
 RUN apk add --no-cache --upgrade \
         curl \
@@ -40,10 +40,10 @@ RUN apk add --no-cache --upgrade \
     && curl -fsSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl \
     && chmod +x /usr/local/bin/kubectl \
     # get kubectx
-    && curl -fsSLo /usr/local/bin/kubectx https://raw.githubusercontent.com/ahmetb/kubectx/v0.6.3/kubectx \
+    && curl -fsSLo /usr/local/bin/kubectx https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubectx \
     && chmod +x /usr/local/bin/kubectx \
     # get kubens
-    && curl -fsSLo /usr/local/bin/kubens https://raw.githubusercontent.com/ahmetb/kubectx/v0.6.3/kubens \
+    && curl -fsSLo /usr/local/bin/kubens https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubens \
     && chmod +x /usr/local/bin/kubens \
     && rm -rf /tmp/*
 
