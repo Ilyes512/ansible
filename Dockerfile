@@ -12,6 +12,7 @@ RUN apk add --no-cache --upgrade --no-progress \
         ca-certificates \
         python3 \
         git \
+        docker-cli \
     && apk add --no-cache --upgrade --no-progress --virtual build-dependencies \
         python3-dev \
         libffi-dev \
