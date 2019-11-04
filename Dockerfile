@@ -3,7 +3,7 @@ FROM alpine:3.10.3
 WORKDIR /ansible
 
 ENV HOME /home
-ENV KUBECTL_VERSION v1.16.1
+ENV KUBECTL_VERSION v1.16.2
 ENV KUBECTX_VERSION v0.7.0
 
 RUN apk add --no-cache --upgrade --no-progress \
