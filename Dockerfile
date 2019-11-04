@@ -13,6 +13,7 @@ RUN apk add --no-cache --upgrade --no-progress \
         python3 \
         git \
         docker-cli \
+        openssh-client \
     && apk add --no-cache --upgrade --no-progress --virtual build-dependencies \
         python3-dev \
         libffi-dev \
