@@ -1,4 +1,4 @@
-FROM alpine:3.11.0
+FROM alpine:3.11.3
 
 WORKDIR /ansible
 
