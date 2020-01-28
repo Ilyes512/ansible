@@ -3,7 +3,7 @@ FROM alpine:3.11.3
 WORKDIR /ansible
 
 ENV HOME /home
-ENV KUBECTL_VERSION v1.17.0
+ENV KUBECTL_VERSION v1.17.2
 ENV KUBECTX_VERSION v0.7.1
 
 RUN apk add --no-cache --upgrade --no-progress \
@@ -38,13 +38,13 @@ RUN apk add --no-cache --upgrade --no-progress \
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
     && if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python3 /usr/bin/python; fi \
     # get kubectl
-    && curl -fsSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl \
+    && curl -fsSLo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" \
     && chmod +x /usr/local/bin/kubectl \
     # get kubectx
-    && curl -fsSLo /usr/local/bin/kubectx https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubectx \
+    && curl -fsSLo /usr/local/bin/kubectx "https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubectx" \
     && chmod +x /usr/local/bin/kubectx \
     # get kubens
-    && curl -fsSLo /usr/local/bin/kubens https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubens \
+    && curl -fsSLo /usr/local/bin/kubens "https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubens" \
     && chmod +x /usr/local/bin/kubens \
     && rm -rf /tmp/*
 

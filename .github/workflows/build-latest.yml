@@ -1,0 +1,27 @@
+name: Build latest image
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - files/**
+      - Dockerfile
+
+env:
+  DOCKER_REPO: ilyes512/ansiblek8s
+
+jobs:
+  build_latest_alpine:
+    name: Build latest image
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to docker registry
+        uses: azure/docker-login@8d6f807dfe933ef49956873df1022dd03a761071
+        with:
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build containers
+        run: docker build --tag $DOCKER_REPO:latest .
+      - name: Push containers
+        run: docker push $DOCKER_REPO:latest

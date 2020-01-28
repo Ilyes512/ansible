@@ -1,0 +1,30 @@
+name: Build tagged image
+
+on:
+  push:
+    tags: ['**']
+
+env:
+  DOCKER_REPO: ilyes512/ansiblek8s
+
+jobs:
+  build_tagged_alpine:
+    name: Build tagged image
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to docker registry
+        uses: azure/docker-login@8d6f807dfe933ef49956873df1022dd03a761071
+        with:
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build containers
+        run: |
+          TAG=`echo $GITHUB_REF | cut -c11-`
+          echo "Docker Tag: $TAG"
+          docker build --tag $DOCKER_REPO:$TAG .
+      - name: Push containers
+        run: |
+          TAG=`echo $GITHUB_REF | cut -c11-`
+          echo "Docker Tag: $TAG"
+          docker push $DOCKER_REPO:$TAG
