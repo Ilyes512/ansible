@@ -16,7 +16,7 @@ docker pull ilyes512/ansiblek8s:latest
 ## Building the docker image(s)
 
 ```
-docker build --tag ilyes512/ansiblek8s:fromsource .
+docker build --tag ilyes512/ansiblek8s:latest .
 ```
 
 ## Misc
