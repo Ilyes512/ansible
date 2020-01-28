@@ -1,6 +1,6 @@
 # AnsibleK8s
 
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ilyes512/ansiblek8s.svg)](https://hub.docker.com/r/ilyes512/ansiblek8s)
+[![Status Latest Alpine-based](https://github.com/Ilyes512/ansiblek8s/workflows/Build%20latest%20image/badge.svg)](https://github.com/Ilyes512/ansiblek8s/actions?query=workflow%3A%22Build+latest+image%22)
 [![Docker Pulls](https://img.shields.io/docker/pulls/ilyes512/ansiblek8s.svg)](https://hub.docker.com/r/ilyes512/ansiblek8s)
 [![MicroBadger Size](https://img.shields.io/microbadger/image-size/ilyes512/ansiblek8s.svg)](https://microbadger.com/images/ilyes512/ansiblek8s)
 [![MicroBadger Layers](https://img.shields.io/microbadger/layers/ilyes512/ansiblek8s.svg)](https://microbadger.com/images/ilyes512/ansiblek8s)
