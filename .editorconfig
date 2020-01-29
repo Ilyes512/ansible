@@ -14,6 +14,5 @@ trim_trailing_whitespace = false
 [*.{yml,yaml}]
 indent_size = 2
 
-[*.tmpl]
-trim_trailing_whitespace = true
+[*.j2]
 insert_final_newline = false
