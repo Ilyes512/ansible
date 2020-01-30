@@ -33,6 +33,8 @@ RUN apk add --no-cache --upgrade --no-progress \
         openshift \
         # needed for Ansible k8s module's validate support
         kubernetes-validate \
+        # needed for Ansible dns lookup support
+        dnspython \
     && apk del build-dependencies \
     # add symlinks for pip3 and pyton3 to pip and python
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
