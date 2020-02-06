@@ -52,7 +52,6 @@ RUN apk add --no-cache --upgrade --no-progress \
     && chmod +x /usr/local/bin/kubens \
     && rm -rf /tmp/*
 
-
 COPY files /
 
 ENTRYPOINT ["docker-entrypoint.sh"]
