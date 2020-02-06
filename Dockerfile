@@ -52,6 +52,16 @@ RUN apk add --no-cache --upgrade --no-progress \
     && chmod +x /usr/local/bin/kubens \
     && rm -rf /tmp/*
 
+RUN git clone https://github.com/salt-formulas/reclass /tmp/reclass \
+    cd /tmp/reclass \
+    && python /tmp/reclass/setup.py install
+
+RUN mkdir -p /etc/ansible \
+    && cp -r /tmp/reclass/examples/nodes /etc/ansible \
+    && cp -r /tmp/reclass/examples/classes /etc/ansible \
+    && cp /tmp/reclass/examples/ansible/test.yml /etc/ansible/test.yml \
+    && ln -s /usr/bin/reclass-ansible /etc/ansible/hosts
+
 COPY files /
 
 ENTRYPOINT ["docker-entrypoint.sh"]
