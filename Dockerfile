@@ -2,9 +2,9 @@ FROM alpine:3.11.5
 
 WORKDIR /ansible
 
-ENV HOME /home
-ENV KUBECTL_VERSION v1.17.2
-ENV KUBECTX_VERSION v0.7.1
+ARG KUBECTL_VERSION=v1.18.1
+# Latest version of Kubectl at the moment: https://storage.googleapis.com/kubernetes-release/release/stable.txt
+ARG KUBECTX_VERSION=v0.8.0
 
 RUN apk add --no-cache --upgrade --no-progress \
         curl \
@@ -14,6 +14,7 @@ RUN apk add --no-cache --upgrade --no-progress \
         git \
         docker-cli \
         openssh-client \
+        sudo \
     && apk add --no-cache --upgrade --no-progress --virtual build-dependencies \
         python3-dev \
         libffi-dev \
@@ -52,7 +53,19 @@ RUN apk add --no-cache --upgrade --no-progress \
     && chmod +x /usr/local/bin/kubens \
     && rm -rf /tmp/*
 
+ARG USERNAME=ansible
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN addgroup -g $USER_GID $USERNAME \
+    && adduser -s /bin/sh -G $USERNAME -D -g '' -u $USER_UID $USERNAME \
+    && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    && chown $USERNAME: /ansible
+
 COPY files /
+
+USER $USERNAME
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["ansible", "--version"]
