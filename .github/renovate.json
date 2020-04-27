@@ -1,7 +1,10 @@
 {
     "extends": ["config:base"],
     "docker": {
-        "patch": {
+        "major": {
+            "enabled": false
+        },
+        "minor": {
             "automerge": true
         }
     }
