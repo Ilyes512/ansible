@@ -1,16 +1,15 @@
-name: Test Building image
+name: Test Building Image
 
 on:
   pull_request:
 
-env:
-  DOCKER_REPO: ilyes512/ansiblek8s
-
 jobs:
-  build_latest_alpine:
-    name: Test Building image
-    runs-on: ubuntu-18.04
+  test_build:
+    name: Test Build
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build containers
-        run: docker build --tag $DOCKER_REPO:latest .
+      - uses: docker/build-push-action@v1
+        with:
+          repository: ilyes512/ansiblek8t
+          push: false
