@@ -1,11 +1,11 @@
-FROM alpine:3.13.1
+FROM alpine:3.13.2
 
 WORKDIR /ansible
 
 # Latest version of Kubectl at the moment: https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ARG KUBECTL_VERSION=v1.20.1
+ARG KUBECTL_VERSION=v1.20.5
 # Latest version of Kubectx at the moment: https://api.github.com/repos/ahmetb/kubectx/releases/latest
-ARG KUBECTX_VERSION=v0.9.1
+ARG KUBECTX_VERSION=v0.9.3
 
 RUN apk add --no-cache --upgrade --no-progress \
         curl \
