@@ -26,6 +26,7 @@ RUN apk add --no-cache --upgrade --no-progress \
     && python3 -m ensurepip \
     && python3 -m pip install --upgrade --no-cache-dir --progress-bar off \
         pip \
+        wheel \
     && python3 -m pip install --upgrade --no-cache-dir --progress-bar off \
         cffi \
         cryptography \
@@ -47,6 +48,8 @@ RUN apk add --no-cache --upgrade --no-progress \
         hvac \
         # needed for Ansible docker \
         docker \
+    && python3 -m pip uninstall --yes \
+        wheel \
     && apk del build-dependencies \
     # add symlinks for pip3 and pyton3 to pip and python
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
