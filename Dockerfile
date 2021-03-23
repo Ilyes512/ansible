@@ -43,6 +43,8 @@ RUN apk add --no-cache --upgrade --no-progress \
         dnspython \
         # needed for Ansible ipaddr functions
         netaddr \
+        # needed for Ansible hashi_vault plugin support
+        hvac \
     && apk del build-dependencies \
     # add symlinks for pip3 and pyton3 to pip and python
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
