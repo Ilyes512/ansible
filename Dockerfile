@@ -33,6 +33,8 @@ RUN apk add --no-cache --upgrade --no-progress \
         passlib \
         bcrypt \
         ansible \
+        ansible-lint \
+        yamllint \
         # openshift is a requirement of the k8s Ansible module
         openshift \
         # needed for Ansible k8s module's validate support
