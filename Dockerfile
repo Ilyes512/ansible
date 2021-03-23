@@ -45,6 +45,8 @@ RUN apk add --no-cache --upgrade --no-progress \
         netaddr \
         # needed for Ansible hashi_vault plugin support
         hvac \
+        # needed for Ansible docker \
+        docker \
     && apk del build-dependencies \
     # add symlinks for pip3 and pyton3 to pip and python
     && if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip; fi \
