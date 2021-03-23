@@ -21,6 +21,8 @@ RUN apk add --no-cache --upgrade --no-progress \
         libffi-dev \
         openssl-dev \
         build-base \
+        rust \
+        cargo \
     && python3 -m ensurepip \
     && python3 -m pip install --upgrade --no-cache-dir --progress-bar off \
         pip \
