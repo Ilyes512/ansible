@@ -57,7 +57,7 @@ RUN apk add --no-cache --upgrade --no-progress \
     && if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python3 /usr/bin/python; fi \
     # get kubectl
     && curl -fsSLo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" \
-    && echo "$KUBECTL_SHA256 */usr/local/bin/kubectl" | sha256sum --check - \
+    && echo "$KUBECTL_SHA256 */usr/local/bin/kubectl" | sha256sum -c - \
     && chmod +x /usr/local/bin/kubectl \
     # get kubectx
     && curl -fsSLo /usr/local/bin/kubectx "https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubectx" \
