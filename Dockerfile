@@ -3,7 +3,8 @@ FROM alpine:3.13.5
 WORKDIR /ansible
 
 # Latest version of Kubectl at the moment: https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ARG KUBECTL_VERSION=v1.20.5
+ARG KUBECTL_VERSION=v1.21.1
+ARG KUBECTL_SHA256=58785190e2b4fc6891e01108e41f9ba5db26e04cebb7c1ac639919a931ce9233
 # Latest version of Kubectx at the moment: https://api.github.com/repos/ahmetb/kubectx/releases/latest
 ARG KUBECTX_VERSION=v0.9.3
 
@@ -56,6 +57,7 @@ RUN apk add --no-cache --upgrade --no-progress \
     && if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python3 /usr/bin/python; fi \
     # get kubectl
     && curl -fsSLo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" \
+    && echo "$KUBECTL_SHA256 */usr/local/bin/kubectl" | sha256sum --check - \
     && chmod +x /usr/local/bin/kubectl \
     # get kubectx
     && curl -fsSLo /usr/local/bin/kubectx "https://raw.githubusercontent.com/ahmetb/kubectx/$KUBECTX_VERSION/kubectx" \
