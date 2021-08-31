@@ -6,7 +6,7 @@ WORKDIR /ansible
 ARG KUBECTL_VERSION=v1.21.1
 ARG KUBECTL_SHA256=58785190e2b4fc6891e01108e41f9ba5db26e04cebb7c1ac639919a931ce9233
 # Latest version of Kubectx at the moment: https://api.github.com/repos/ahmetb/kubectx/releases/latest
-ARG KUBECTX_VERSION=v0.9.3
+ARG KUBECTX_VERSION=v0.9.4
 
 RUN apk add --no-cache --upgrade --no-progress \
         curl \
