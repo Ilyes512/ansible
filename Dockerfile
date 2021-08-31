@@ -3,8 +3,8 @@ FROM alpine:3.14.2
 WORKDIR /ansible
 
 # Latest version of Kubectl at the moment: https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ARG KUBECTL_VERSION=v1.21.1
-ARG KUBECTL_SHA256=58785190e2b4fc6891e01108e41f9ba5db26e04cebb7c1ac639919a931ce9233
+ARG KUBECTL_VERSION=v1.22.1
+ARG KUBECTL_SHA256=78178a8337fc6c76780f60541fca7199f0f1a2e9c41806bded280a4a5ef665c9
 # Latest version of Kubectx at the moment: https://api.github.com/repos/ahmetb/kubectx/releases/latest
 ARG KUBECTX_VERSION=v0.9.4
 
