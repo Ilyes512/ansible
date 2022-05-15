@@ -1,0 +1,29 @@
+version: "3"
+
+silent: true
+
+tasks:
+
+  pr:
+    desc: Run Act with pull_request event
+    preconditions:
+      - sh: act --version
+        msg: "You need to install Act to run this task. See https://github.com/nektos/act for more info."
+    cmds:
+      - act --directory .. --eventpath act/pull_request.json pull_request
+
+  master:
+    desc: Run Act with push event on master branch
+    preconditions:
+      - sh: act --version
+        msg: "You need to install Act to run this task. See https://github.com/nektos/act for more info."
+    cmds:
+      - act --directory .. --eventpath act/master.json push
+
+  tag:
+    desc: Run Act with tag (push) event
+    preconditions:
+      - sh: act --version
+        msg: "You need to install Act to run this task. See https://github.com/nektos/act for more info."
+    cmds:
+      - act --directory .. --eventpath act/tag.json push

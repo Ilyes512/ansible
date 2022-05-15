@@ -1,0 +1,11 @@
+{
+    "pull_request": {
+        "ref": "refs/pull/2/merge",
+        "head": {
+            "ref": "my-pull-request"
+        },
+        "base": {
+            "ref": "master"
+        }
+    }
+}

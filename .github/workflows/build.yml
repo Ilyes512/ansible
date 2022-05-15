@@ -1,0 +1,67 @@
+name: Build Images
+
+on:
+  push:
+    branches: [master]
+    tags: ['*']
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Debug action
+        uses: hmarr/debug-action@v2
+      - uses: hadolint/hadolint-action@v2.0.0
+      - name: Image name
+        id: image_name
+        uses: ASzc/change-string-case-action@v2
+        with:
+          string: ghcr.io/${{ github.repository }}
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        if: ${{ !(env.ACT || github.actor == 'dependabot[bot]') }}
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker meta (ansible)
+        id: meta_ansible
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ steps.image_name.outputs.lowercase }}
+          flavor: onlatest=true
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr,prefix=pr-
+      - name: Docker meta (k8s)
+        id: meta_k8s
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ steps.image_name.outputs.lowercase }}
+          flavor: prefix=k8s-,onlatest=true
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr,prefix=k8s-pr-
+      - name: Build and push (ansible)
+        uses: docker/build-push-action@v2
+        with:
+          push: ${{ !(env.ACT || github.actor == 'dependabot[bot]') }}
+          context: .
+          target: ansible
+          tags: ${{ steps.meta_ansible.outputs.tags }}
+          labels: ${{ steps.meta_ansible.outputs.labels }}
+      - name: Build and push (k8s)
+        uses: docker/build-push-action@v2
+        with:
+          push: ${{ !(env.ACT || github.actor == 'dependabot[bot]') }}
+          context: .
+          target: k8s
+          tags: ${{ steps.meta_k8s.outputs.tags }}
+          labels: ${{ steps.meta_k8s.outputs.labels }}

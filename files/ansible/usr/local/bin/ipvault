@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+main() {
+    readarray -d '' vaultfiles < <(find . -regextype egrep -regex '.*/vault\.ya{0,1}ml$' -print0 -o -regex '.*[^/]*\.vault\.ya{0,1}ml$' -print0)
+}
+
+encrypt() {
+    for vaultfile in "${vaultfiles[@]}"; do
+        if [ ! -f "$vaultfile.enc" ]; then
+            printf "\033[1;33m[i]\033[0m Encrypting %s" "$vaultfile"
+            output=$(ANSIBLE_NOCOLOR=true ansible-vault encrypt "$vaultfile" 2>&1 >/dev/null)
+
+            if [ ! -z "$output" ]; then
+                if [ "$output" = "ERROR! input is already encrypted" ]; then
+                    printf "\n    Skipped because it was already encrypted.\n"
+                    echo ""
+                else
+                    printf "\n\e[31m$output\e[0m\n" >&2
+                    echo ""
+                fi
+            fi
+
+            continue
+        fi
+
+        local preform=$(ansible-vault view "$vaultfile.enc")
+        local postform=$(cat "$vaultfile")
+
+        if [ "$preform" == "$postform" ]; then
+            printf "\033[1;33m[i]\033[0m Restoring unchanged file %s\n" $vaultfile
+            mv -f "$vaultfile.enc" "$vaultfile"
+            echo ""
+        else
+            rm "$vaultfile.enc"
+            printf "\033[1;32m[✔]\033[0m Encrypting %s" "$vaultfile"
+            printf "\n    "
+            ansible-vault encrypt "$vaultfile"
+            echo ""
+        fi
+    done
+}
+
+decrypt() {
+    for vaultfile in ${vaultfiles[@]}; do
+        if [ -f "$vaultfile.enc" ]; then
+            printf "\033[1;32m[?]\033[0m Vaultfile \"%s\" already seems to have a \"%s.enc\" file...\n" "$vaultfile" "${vaultfile##*/}"
+            printf "    It most likely is already decrypted. Otherwise remove \"%s.enc\" and run this command again.\n\n" "$vaultfile"
+        else
+            printf "\033[1;33m[i]\033[0m Decrypting %s... " "$vaultfile"
+            cp "$vaultfile" "$vaultfile.enc"
+            printf "\n    "
+            ansible-vault decrypt "$vaultfile"
+            echo ""
+        fi
+    done
+}
+
+ipvault () {
+case "$1" in
+    encrypt)
+        main
+        encrypt
+    ;;
+
+    decrypt)
+        main
+        decrypt
+        ;;
+
+    *)
+        printf >&2 "\033[31mERROR:\033[m\n\tUsage: "${0##*/}" {encrypt|decrypt}\n"
+        exit 1
+        ;;
+esac
+}
+
+ipvault $@

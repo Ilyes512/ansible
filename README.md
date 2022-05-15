@@ -1,23 +1,45 @@
-# AnsibleK8s
+# ansible
 
-[![Status Latest Alpine-based](https://github.com/Ilyes512/ansiblek8s/workflows/Build%20latest%20image/badge.svg)](https://github.com/Ilyes512/ansiblek8s/actions?query=workflow%3A%22Build+latest+image%22)
-[![Docker Pulls](https://img.shields.io/docker/pulls/ilyes512/ansiblek8s.svg)](https://hub.docker.com/r/ilyes512/ansiblek8s)
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/ilyes512/ansiblek8s.svg)](https://microbadger.com/images/ilyes512/ansiblek8s)
-[![MicroBadger Layers](https://img.shields.io/microbadger/layers/ilyes512/ansiblek8s.svg)](https://microbadger.com/images/ilyes512/ansiblek8s)
+[![Build Images](https://github.com/Ilyes512/ansible/workflows/Build%20Images/badge.svg)](https://github.com/Ilyes512/ansible/actions?query=workflow%3A%22Build+Images%22)
 
-A image based on Alpine with Ansible and Kubectl.
+Multiple Ansible images with different kind of tools ready for K8s interactions.
 
-## Pulling the image
+## Pulling the images
 
 ```
-docker pull ilyes512/ansiblek8s:latest
+docker pull ghcr.io/ilyes512/ansible:latest
+docker pull ghcr.io/ilyes512/ansible:k8s-latest
 ```
 
-## Building the docker image(s)
+## Task commands
+
+Available [Task](https://taskfile.dev/#/) commands:
 
 ```
-docker build --tag ilyes512/ansiblek8s:latest .
+* a:shell:              Interactive shell with Ansible
+* act:master:           Run Act with push event on master branch
+* act:pr:               Run Act with pull_request event
+* act:tag:              Run Act with tag (push) event
+* build:                Build and run new.Dockerfile
+* check-versions:       Check kubctl and kubectx versions
+* lint:                 Apply a Dockerfile linter (https://github.com/hadolint/hadolint)
+* requirements:         Update requirements.txt file
 ```
+
+### Act tasks
+
+[Act](https://github.com/nektos/act) is a tool to run Github Actions locally. Before you can run Act and the
+`act:*`-tasks you need to add an `GITHUB_TOKEN`-secret. You can do this by adding the following
+Act config file to you users `$HOME`-directory:
+
+File path: `~/.actrc`
+```
+-s GITHUB_TOKEN=<your_github_token>
+```
+
+Replace `<your_github_token>` with a Github personal acces token. You can generate a new token
+[here](https://github.com/settings/tokens/new?description=Act) (no scopes
+are needed!).
 
 ## Misc
 
@@ -30,7 +52,7 @@ docker build --tag ilyes512/ansiblek8s:latest .
 <details><summary>Example:</summary>
 
 ```bash
-docker run --rm --tty --env KUBECONFIG_OVERRIDE="`kind get kubeconfig --internal`" ilyes512/ansiblek8s kubectl get nodes
+docker run --rm --tty --env KUBECONFIG_OVERRIDE="`kind get kubeconfig --internal`" ghcr.io/ilyes512/ansible:k8s-latest kubectl get nodes
 ```
 
 Quote:
@@ -43,13 +65,13 @@ For more info see: https://github.com/kubernetes-sigs/kind
 
 The following build arguments can be set (the values shown are the default values):
 
-`USERNAME`: `ansible`
-`USER_UID`: `1000`
-`USER_GID`: `$USER_UID`
+`DOCKER_REGISTRY_HOST`: `docker.io`
+`DOCKER_POSTGRES_IMAGE_NAME`: `library/debian`
+`DOCKER_DEBIAN_IMAGE_TAG`: `11.3`
 
 <details><summary>Example:</summary>
 
 ```bash
-docker build --build-arg USERNAME=foobar --build-arg USER_UID=1001 --tag ilyes512/ansiblek8s:foobar-user .  
+docker build --build-arg DOCKER_DEBIAN_IMAGE_TAG=11.0 --tag ghcr.io/ilyes512/ansible:k8s-latest .  
 ```
 </details>
