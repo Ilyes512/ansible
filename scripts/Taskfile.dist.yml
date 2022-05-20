@@ -1,0 +1,37 @@
+version: "3"
+
+silent: true
+
+tasks:
+
+  run-script:
+    preconditions:
+      - sh: test "{{.RUN_SCRIPT}}" != ""
+        msg: RUN_SCRIPT was not given!
+    cmds:
+      - cmd: docker run
+             --interactive
+             --tty
+             --rm
+             --volume $(pwd)/..:/workdir
+             --workdir /workdir
+             ghcr.io/ilyes512/utils:{{.DOCKER_UTILS_IMAGE_TAG}}
+             /bin/bash -c ./scripts/{{.RUN_SCRIPT}}
+        ignore_error: true
+
+  check-versions:
+    desc: Check kubctl and kubectx versions
+    output: group
+    deps:
+      - task: run-script
+        vars:
+          RUN_SCRIPT: check_kubectl.sh
+      - task: run-script
+        vars:
+          RUN_SCRIPT: check_kubectx.sh
+      - task: run-script
+        vars:
+          RUN_SCRIPT: check_kubens.sh
+      - task: run-script
+        vars:
+          RUN_SCRIPT: check_helm.sh

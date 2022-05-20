@@ -16,14 +16,14 @@ docker pull ghcr.io/ilyes512/ansible:k8s-latest
 Available [Task](https://taskfile.dev/#/) commands:
 
 ```
-* a:shell:              Interactive shell with Ansible
-* act:master:           Run Act with push event on master branch
-* act:pr:               Run Act with pull_request event
-* act:tag:              Run Act with tag (push) event
-* build:                Build and run new.Dockerfile
-* check-versions:       Check kubctl and kubectx versions
-* lint:                 Apply a Dockerfile linter (https://github.com/hadolint/hadolint)
-* requirements:         Update requirements.txt file
+* a:shell:                      Interactive shell with Ansible
+* act:master:                   Run Act with push event on master branch
+* act:pr:                       Run Act with pull_request event
+* act:tag:                      Run Act with tag (push) event
+* build:                        Build and run new.Dockerfile
+* lint:                         Apply a Dockerfile linter (https://github.com/hadolint/hadolint)
+* requirements:                 Update requirements.txt file
+* scripts:check-versions:       Check kubctl and kubectx versions
 ```
 
 ### Act tasks
