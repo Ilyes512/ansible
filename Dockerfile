@@ -88,8 +88,8 @@ ARG KUBECTX_VERSION=v0.9.4
 ARG KUBECTX_SHA256=db5a48e85ff4d8c6fa947e3021e11ba4376f9588dd5fa779a80ed5c18287db22
 ARG KUBENS_SHA256=8b3672961fb15f8b87d5793af8bd3c1cca52c016596fbf57c46ab4ef39265fcd
 # Latest version of Helm at the moment: https://api.github.com/repos/helm/helm/releases/latest
-ARG HELM_VERSION=v3.8.2
-ARG HELM_SHA256=6cb9a48f72ab9ddfecab88d264c2f6508ab3cd42d9c09666be16a7bf006bed7b
+ARG HELM_VERSION=v3.9.0
+ARG HELM_SHA256=1484ffb0c7a608d8069470f48b88d729e88c41a1b6602f145231e8ea7b43b50a
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
