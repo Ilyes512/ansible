@@ -60,18 +60,3 @@ Quote:
 
 For more info see: https://github.com/kubernetes-sigs/kind
 </details>
-
-**Build arguments**:
-
-The following build arguments can be set (the values shown are the default values):
-
-`DOCKER_REGISTRY_HOST`: `docker.io`
-`DOCKER_POSTGRES_IMAGE_NAME`: `library/debian`
-`DOCKER_DEBIAN_IMAGE_TAG`: `11.3`
-
-<details><summary>Example:</summary>
-
-```bash
-docker build --build-arg DOCKER_DEBIAN_IMAGE_TAG=11.0 --tag ghcr.io/ilyes512/ansible:k8s-latest .  
-```
-</details>

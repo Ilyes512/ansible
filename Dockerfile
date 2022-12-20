@@ -1,7 +1,4 @@
-ARG DOCKER_REGISTRY_HOST=docker.io
-ARG DOCKER_POSTGRES_IMAGE_NAME=library/debian
-ARG DOCKER_DEBIAN_IMAGE_TAG=11.3
-FROM $DOCKER_REGISTRY_HOST/$DOCKER_POSTGRES_IMAGE_NAME:$DOCKER_DEBIAN_IMAGE_TAG AS builder
+FROM docker.io/library/debian:11.5 AS builder
 
 ARG UNIQUE_ID_FOR_CACHEFROM=builder
 
@@ -31,7 +28,7 @@ COPY requirements.txt /ansible/requirements.txt
 RUN python3 -m pip install --no-cache-dir --progress-bar off wheel \
     && python3 -m pip install --no-cache-dir --progress-bar off --requirement /ansible/requirements.txt
 
-FROM $DOCKER_REGISTRY_HOST/$DOCKER_POSTGRES_IMAGE_NAME:$DOCKER_DEBIAN_IMAGE_TAG AS ansible
+FROM docker.io/library/debian:11.5 AS ansible
 
 ARG UNIQUE_ID_FOR_CACHEFROM=ansible
 
@@ -81,15 +78,15 @@ FROM ansible AS k8s
 ARG UNIQUE_ID_FOR_CACHEFROM=ansiblek8s
 
 # Latest version of Kubectl at the moment: https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ARG KUBECTL_VERSION=v1.24.0
-ARG KUBECTL_SHA256=94d686bb6772f6fb59e3a32beff908ab406b79acdfb2427abdc4ac3ce1bb98d7
+ARG KUBECTL_VERSION=v1.26.0
+ARG KUBECTL_SHA256=b6769d8ac6a0ed0f13b307d289dc092ad86180b08f5b5044af152808c04950ae
 # Latest version of kubectx/kubens at the moment: https://api.github.com/repos/ahmetb/kubectx/releases/latest
 ARG KUBECTX_VERSION=v0.9.4
 ARG KUBECTX_SHA256=db5a48e85ff4d8c6fa947e3021e11ba4376f9588dd5fa779a80ed5c18287db22
 ARG KUBENS_SHA256=8b3672961fb15f8b87d5793af8bd3c1cca52c016596fbf57c46ab4ef39265fcd
 # Latest version of Helm at the moment: https://api.github.com/repos/helm/helm/releases/latest
-ARG HELM_VERSION=v3.9.0
-ARG HELM_SHA256=1484ffb0c7a608d8069470f48b88d729e88c41a1b6602f145231e8ea7b43b50a
+ARG HELM_VERSION=v3.10.3
+ARG HELM_SHA256=950439759ece902157cf915b209b8d694e6f675eaab5099fb7894f30eeaee9a2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

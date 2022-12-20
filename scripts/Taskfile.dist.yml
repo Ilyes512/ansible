@@ -15,7 +15,7 @@ tasks:
              --rm
              --volume $(pwd)/..:/workdir
              --workdir /workdir
-             ghcr.io/ilyes512/utils:{{.DOCKER_UTILS_IMAGE_TAG}}
+             ghcr.io/ilyes512/utils:{{.UTILS_TAG_VERSION}}
              /bin/bash -c ./scripts/{{.RUN_SCRIPT}}
         ignore_error: true
 
