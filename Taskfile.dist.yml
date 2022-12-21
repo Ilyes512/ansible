@@ -3,10 +3,13 @@ version: "3"
 silent: true
 
 vars:
-  DOCKER_REGISTRY_HOST: ghcr.io
-  DOCKER_REGISTRY_PATH: ilyes512/ansible
-  DOCKER_HADOLINT_IMAGE_TAG: v2.10.0
-  DOCKER_UTILS_IMAGE_TAG: 1.1.0
+  DOCKER_REPO: ghcr.io
+  DOCKER_OWNER: ilyes512
+  DOCKER_IMAGE_NAME: ansible
+  # Latatest version of Hadolint: https://hub.docker.com/r/hadolint/hadolint/tags or https://github.com/hadolint/hadolint/releases
+  HADOLINT_TAG_VERSION: v2.12.0
+  # Latatest version of utils: https://github.com/Ilyes512/utils/pkgs/container/utils or https://github.com/Ilyes512/utils/releases
+  UTILS_TAG_VERSION: 1.3.0
 
 includes:
   act:
@@ -22,11 +25,11 @@ tasks:
     desc: Build and run new.Dockerfile
     cmds:
       - docker build
-        --tag {{.DOCKER_REGISTRY_HOST}}/{{.DOCKER_REGISTRY_PATH}}:latest
+        --tag {{.DOCKER_REPO}}/{{.DOCKER_OWNER}}/{{.DOCKER_IMAGE_NAME}}:latest
         --target ansible
         .
       - docker build
-        --tag {{.DOCKER_REGISTRY_HOST}}/{{.DOCKER_REGISTRY_PATH}}:k8s-latest
+        --tag {{.DOCKER_REPO}}/{{.DOCKER_OWNER}}/{{.DOCKER_IMAGE_NAME}}:k8s-latest
         --target k8s
         .
 
@@ -34,12 +37,12 @@ tasks:
     desc: Update requirements.txt file
     cmds:
       - docker build
-        --tag {{.DOCKER_REGISTRY_HOST}}/{{.DOCKER_REGISTRY_PATH}}:requirements-latest
+        --tag {{.DOCKER_REPO}}/{{.DOCKER_OWNER}}/{{.DOCKER_IMAGE_NAME}}:requirements-latest
         --file requirements.Dockerfile
         --no-cache
         .
-      - docker run --rm --tty {{.DOCKER_REGISTRY_HOST}}/{{.DOCKER_REGISTRY_PATH}}:requirements-latest > requirements.txt
-      - docker rmi {{.DOCKER_REGISTRY_HOST}}/{{.DOCKER_REGISTRY_PATH}}:requirements-latest
+      - docker run --rm --tty {{.DOCKER_REPO}}/{{.DOCKER_OWNER}}/{{.DOCKER_IMAGE_NAME}}:requirements-latest > requirements.txt
+      - docker rmi {{.DOCKER_REPO}}/{{.DOCKER_OWNER}}/{{.DOCKER_IMAGE_NAME}}:requirements-latest
 
   lint:
     desc: Apply a Dockerfile linter (https://github.com/hadolint/hadolint)
@@ -48,7 +51,7 @@ tasks:
         --interactive
         --rm
         --volume $(pwd)/.hadolint.yml:/.hadolint.yml
-        hadolint/hadolint:{{.DOCKER_HADOLINT_IMAGE_TAG}}
+        hadolint/hadolint:{{.HADOLINT_TAG_VERSION}}
         hadolint
         -
         < Dockerfile
@@ -64,4 +67,4 @@ tasks:
         --user $(id -u):$(id -g)
         --volume $(pwd):/ansible
         --env ANSIBLE_CONFIG="/ansible/ansible"
-        {{.DOCKER_REGISTRY_HOST}}/{{.DOCKER_REGISTRY_PATH}}:latest
+        {{.DOCKER_REPO}}/{{.DOCKER_OWNER}}/{{.DOCKER_IMAGE_NAME}}:latest

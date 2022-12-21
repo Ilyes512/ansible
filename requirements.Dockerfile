@@ -1,7 +1,4 @@
-ARG DOCKER_REGISTRY_HOST=docker.io
-ARG DOCKER_POSTGRES_IMAGE_NAME=library/debian
-ARG DOCKER_DEBIAN_IMAGE_TAG=11.3
-FROM $DOCKER_REGISTRY_HOST/$DOCKER_POSTGRES_IMAGE_NAME:$DOCKER_DEBIAN_IMAGE_TAG
+FROM docker.io/library/debian:11.5
 
 RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
