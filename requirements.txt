@@ -68,7 +68,7 @@ subprocess-tee==0.4.1
 text-unidecode==1.3
 tomli==2.0.1
 typing_extensions==4.4.0
-urllib3==1.26.13
+urllib3==1.26.17
 wcmatch==8.4.1
 websocket-client==1.4.2
 wheel==0.38.4
