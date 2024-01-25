@@ -22,7 +22,7 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
       - name: Image name
         id: image_name
-        uses: ASzc/change-string-case-action@v5
+        uses: ASzc/change-string-case-action@v6
         with:
           string: ghcr.io/${{ github.repository }}
       - name: Log in to the Container registry
