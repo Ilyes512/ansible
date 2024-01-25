@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:11.5 AS builder
+FROM docker.io/library/debian:12.4 AS builder
 
 ARG UNIQUE_ID_FOR_CACHEFROM=builder
 
@@ -8,13 +8,7 @@ RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
         build-essential \
         gcc \
-        python3 \
-        python3-pip \
-        python3-venv \
-    && python3 -m pip install --upgrade --no-cache-dir --progress-bar off \
-        pip \
-        wheel \
-        setuptools \
+        python3-full \
     && python3 -m venv /opt/venv \
     && apt-get autoremove --assume-yes \
     && apt-get clean --assume-yes \
@@ -23,12 +17,16 @@ RUN apt-get update \
 
 ENV PATH="/opt/venv/bin:$PATH"
 
+RUN python3 -m pip install --upgrade --no-cache-dir --progress-bar off \
+        pip \
+        wheel \
+        setuptools
+
 COPY requirements.txt /ansible/requirements.txt
 
-RUN python3 -m pip install --no-cache-dir --progress-bar off wheel \
-    && python3 -m pip install --no-cache-dir --progress-bar off --requirement /ansible/requirements.txt
+RUN python3 -m pip install --no-cache-dir --progress-bar off --requirement /ansible/requirements.txt
 
-FROM docker.io/library/debian:11.5 AS ansible
+FROM docker.io/library/debian:12.4 AS ansible
 
 ARG UNIQUE_ID_FOR_CACHEFROM=ansible
 
