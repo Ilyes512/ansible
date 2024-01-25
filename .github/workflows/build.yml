@@ -51,7 +51,7 @@ jobs:
             type=ref,event=pr,prefix=pr-
       - name: Docker meta (k8s)
         id: meta_k8s
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ steps.image_name.outputs.lowercase }}
           flavor: prefix=k8s-,onlatest=true
