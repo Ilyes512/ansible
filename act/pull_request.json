@@ -5,7 +5,7 @@
             "ref": "my-pull-request"
         },
         "base": {
-            "ref": "master"
+            "ref": "main"
         }
     }
 }

@@ -12,13 +12,13 @@ tasks:
     cmds:
       - act --directory .. --eventpath act/pull_request.json pull_request
 
-  master:
-    desc: Run Act with push event on master branch
+  main:
+    desc: Run Act with push event on main branch
     preconditions:
       - sh: act --version
         msg: "You need to install Act to run this task. See https://github.com/nektos/act for more info."
     cmds:
-      - act --directory .. --eventpath act/master.json push
+      - act --directory .. --eventpath act/main.json push
 
   tag:
     desc: Run Act with tag (push) event
