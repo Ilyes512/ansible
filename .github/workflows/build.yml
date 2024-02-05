@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Debug action
-        uses: hmarr/debug-action@v2
+        uses: hmarr/debug-action@v3
       - uses: hadolint/hadolint-action@v3.1.0
       - name: Image name
         id: image_name
