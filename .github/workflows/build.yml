@@ -38,7 +38,7 @@ jobs:
           platforms: ${{ matrix.arch }}
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v3.0.0
+        uses: docker/setup-buildx-action@v3.3.0
       - name: Docker meta (ansible)
         id: meta_ansible
         uses: docker/metadata-action@v5
