@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:12.4 AS builder
+FROM debian:12.5-slim AS builder
 
 ARG UNIQUE_ID_FOR_CACHEFROM=builder
 

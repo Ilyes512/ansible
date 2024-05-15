@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:12.4 AS builder
+FROM debian:12.5-slim AS builder
 
 ARG UNIQUE_ID_FOR_CACHEFROM=builder
 
@@ -26,7 +26,7 @@ COPY requirements.txt /ansible/requirements.txt
 
 RUN python3 -m pip install --no-cache-dir --progress-bar off --requirement /ansible/requirements.txt
 
-FROM docker.io/library/debian:12.4 AS ansible
+FROM debian:12.5-slim AS ansible
 
 ARG UNIQUE_ID_FOR_CACHEFROM=ansible
 
