@@ -1,0 +1,45 @@
+name: Main
+
+on:
+  push:
+    branches: ['main']
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  linting:
+    name: Linting
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+
+  build:
+    uses: Ilyes512/github-actions/.github/workflows/build.yml@0.2.1
+    needs: linting
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm64
+    with:
+      runner-os: ubuntu-24.04
+      platform: ${{ matrix.platform }}
+      image-name: ghcr.io/${{ github.repository }}
+      cache-key: ${{ matrix.os }}-buildx-${{ matrix.platform }}-${{ github.ref_name }}-${{ github.sha }}
+      cache-restore-keys: |
+        ${{ matrix.os }}-buildx-${{ matrix.platform }}-${{ github.ref_name }}-
+        ${{ matrix.os }}-buildx-${{ matrix.platform }}-
+
+  merge:
+    uses: Ilyes512/github-actions/.github/workflows/merge.yml@0.2.1
+    needs: build
+    with:
+      image-name: ghcr.io/${{ github.repository }}
+      runner-os: ubuntu-24.04
