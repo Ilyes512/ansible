@@ -49,7 +49,7 @@ python-dateutil==2.9.0.post0
 python-string-utils==1.0.0
 PyYAML==6.0.1
 referencing==0.35.1
-requests==2.31.0
+requests==2.32.0
 requests-oauthlib==2.0.0
 resolvelib==1.0.1
 rich==13.7.1
