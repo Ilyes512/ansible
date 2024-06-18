@@ -61,7 +61,7 @@ setuptools==69.5.1
 six==1.16.0
 subprocess-tee==0.4.1
 typing_extensions==4.11.0
-urllib3==2.2.1
+urllib3==2.2.2
 wcmatch==8.5.2
 websocket-client==1.8.0
 wheel==0.43.0
