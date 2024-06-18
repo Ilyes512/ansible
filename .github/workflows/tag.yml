@@ -20,7 +20,7 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
 
   build:
-    uses: Ilyes512/github-actions/.github/workflows/build.yml@0.2.1
+    uses: Ilyes512/github-actions/.github/workflows/build.yml@0.2.2
     needs: linting
     strategy:
       fail-fast: false
@@ -39,7 +39,7 @@ jobs:
         ${{ matrix.os }}-buildx-${{ matrix.platform }}-
 
   merge:
-    uses: Ilyes512/github-actions/.github/workflows/merge.yml@0.2.1
+    uses: Ilyes512/github-actions/.github/workflows/merge.yml@0.2.2
     needs: build
     with:
       image-name: ghcr.io/${{ github.repository }}
