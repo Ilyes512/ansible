@@ -76,15 +76,15 @@ FROM ansible AS k8s
 ARG UNIQUE_ID_FOR_CACHEFROM=ansiblek8s
 
 # Latest version of Kubectl at the moment: https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ARG KUBECTL_VERSION=v1.30.1
-ARG KUBECTL_SHA256=5b86f0b06e1a5ba6f8f00e2b01e8ed39407729c4990aeda961f83a586f975e8a
+ARG KUBECTL_VERSION=v1.31.0
+ARG KUBECTL_SHA256=7c27adc64a84d1c0cc3dcf7bf4b6e916cc00f3f576a2dbac51b318d926032437
 # Latest version of kubectx/kubens at the moment: https://api.github.com/repos/ahmetb/kubectx/releases/latest
 ARG KUBECTX_VERSION=v0.9.5
 ARG KUBECTX_SHA256=a2247ffd23e79f89abdd0e8173379d7172511f02a3f63c9936d3824e0dd60648
 ARG KUBENS_SHA256=acc1a9c7f6b722fbe5fad25dd0e784a7335d18436b9c414ab996629e82702cba
 # Latest version of Helm at the moment: https://api.github.com/repos/helm/helm/releases/latest
-ARG HELM_VERSION=v3.15.0
-ARG HELM_SHA256=a74747ac40777b86d3ff6f1be201504bba65ca46cd68b5fe25d3c394d0dcf745
+ARG HELM_VERSION=v3.16.1
+ARG HELM_SHA256=e57e826410269d72be3113333dbfaac0d8dfdd1b0cc4e9cb08bdf97722731ca9
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
