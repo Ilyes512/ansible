@@ -30,7 +30,7 @@ FROM debian:12.7-slim AS ansible
 
 ARG UNIQUE_ID_FOR_CACHEFROM=ansible
 
-ENV HOME /home
+ENV HOME=/home
 
 WORKDIR /ansible
 
