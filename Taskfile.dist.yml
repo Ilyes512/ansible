@@ -16,8 +16,10 @@ includes:
     taskfile: ./scripts
     dir: ./scripts
 
-tasks:
+# env:
+#   BUILDKIT_PROGRESS: plain
 
+tasks:
   build:
     desc: Build and run new.Dockerfile
     cmds:
