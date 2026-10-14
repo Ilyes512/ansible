@@ -79,6 +79,7 @@ tasks:
         netaddr
         hvac
         docker
+        upcloud-api
         ansible
       # CalVer tooling: floor only, capping on the major would expire every January
       - docker run --rm
