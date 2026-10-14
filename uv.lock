@@ -175,6 +175,7 @@ dependencies = [
     { name = "netaddr" },
     { name = "openshift" },
     { name = "passlib" },
+    { name = "upcloud-api" },
     { name = "yamllint" },
 ]
 
@@ -193,6 +194,7 @@ requires-dist = [
     { name = "netaddr", specifier = ">=1.3.0,<2" },
     { name = "openshift", specifier = ">=0.13.2,<0.14" },
     { name = "passlib", specifier = ">=1.7.4,<2" },
+    { name = "upcloud-api", specifier = ">=2.9.0,<3" },
     { name = "yamllint", specifier = ">=1.38.0" },
 ]
 
@@ -1566,6 +1568,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/a3/26/b09b8010994eccc3c09092e6b34058f36a460eea2d4c3e8b910c695975a0/typing_inspection-0.4.4.tar.gz", hash = "sha256:547274fa6b0a561ccf549cc9524b999a578e737d015d8709d021f9d0d13bea47", size = 76928, upload-time = "2026-08-12T12:37:25.997Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/67/81/4add07e5172b7ac40d8ed5ff580409a7801a4fe26d529bdd915401dabfbe/typing_inspection-0.4.4-py3-none-any.whl", hash = "sha256:65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147", size = 14750, upload-time = "2026-08-12T12:37:24.648Z" },
+]
+
+[[package]]
+name = "upcloud-api"
+version = "2.9.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d2/c6/ecae7186212847ed75d04508bce502d7880415140caa11555ca906165200/upcloud_api-2.9.0.tar.gz", hash = "sha256:de6361da5cfda552eea97da940e3ef824b3f63a76db2036d54cdc1a5567be3b8", size = 61399, upload-time = "2025-09-25T09:21:18.684Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4e/c9/278c1355ecfd5481074db816967fd4839e0adf3de7b7bdb2bef46cbdf1f6/upcloud_api-2.9.0-py3-none-any.whl", hash = "sha256:a7524a921a1d2ff97f2b64a8682eec534511f8eb4687470cd3a175a08877a1cc", size = 36950, upload-time = "2025-09-25T09:21:17.643Z" },
 ]
 
 [[package]]
