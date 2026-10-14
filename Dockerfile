@@ -41,6 +41,9 @@ COPY files/ansible /
 
 ENV PATH="/opt/venv/bin:$PATH"
 
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["bash"]
+
 FROM ansible AS k8s
 
 ARG TARGETARCH
@@ -90,5 +93,3 @@ RUN case "${TARGETARCH}" in \
     && rm -rf /tmp/*
 
 COPY files/ansiblek8s /
-
-ENTRYPOINT ["docker-entrypoint.sh"]
