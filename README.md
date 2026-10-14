@@ -39,14 +39,28 @@ major, while CalVer tooling (`ansible-lint`, `yamllint`) only gets a lower bound
 - `task deps:audit` — check the locked versions against the [OSV](https://osv.dev/) database for
   known vulnerabilities.
 
+Some dependencies only exist for a collection the image doesn't bundle (e.g. `upcloud-api` for `upcloud.cloud`).
+Install such collections via the project's own `requirements.yml`.
+
 ## Misc
 
 **Workdir**: `/workspace`
 
 **Environment variables**:
 
-`KUBECONFIG_OVERRIDE`: If this env variable is set, it will put the contents of the variable in a (new) file at
-`/root/.kube/context-override`. The path of the new file is then set as the value of `KUBECONFIG`-env.
+`SSH_PRIVATE_KEY`: If this env variable is set, the key is loaded into an `ssh-agent` and the variable is unset
+before the command runs, so the key never touches the disk.
+
+<details><summary>Example:</summary>
+
+```bash
+SSH_PRIVATE_KEY="op://Vault/Item/private key?ssh-format=openssh" \
+op run -- docker run --rm --tty --env SSH_PRIVATE_KEY ghcr.io/specsnl/ansible:latest ssh-add -l
+```
+</details>
+
+`KUBECONFIG_OVERRIDE` (`k8s` image only): If this env variable is set, it will put the contents of the variable in a
+(new) file at `$HOME/.kube/config-override`. The path of the new file is then set as the value of `KUBECONFIG`-env.
 
 <details><summary>Example:</summary>
 
@@ -60,3 +74,7 @@ Quote:
 
 For more info see: https://github.com/kubernetes-sigs/kind
 </details>
+
+**Entrypoint hooks**: `docker-entrypoint.sh` sources every `/etc/docker-entrypoint.d/*.sh` before running the
+command, so variables they export reach it. Derived images can add their own hooks there (the `k8s` image uses this
+for `KUBECONFIG_OVERRIDE`).
