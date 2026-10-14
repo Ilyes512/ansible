@@ -2,7 +2,7 @@
 # check=error=true
 
 # Latest version: https://github.com/astral-sh/uv/releases
-FROM ghcr.io/astral-sh/uv:0.13.0 AS uv
+FROM ghcr.io/astral-sh/uv:0.13.1-python3.15-alpine3.23 AS uv
 
 # Latest version: https://hub.docker.com/_/python/tags
 FROM python:3.14.7-alpine3.24 AS ansible
@@ -11,7 +11,7 @@ ENV HOME=/home
 
 WORKDIR /workspace
 
-COPY --from=uv /uv /usr/local/bin/uv
+COPY --from=uv /usr/local/bin/uv /usr/local/bin/uv
 
 COPY pyproject.toml uv.lock ./
 
