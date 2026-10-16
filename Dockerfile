@@ -17,22 +17,21 @@ COPY pyproject.toml uv.lock ./
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
-# hadolint ignore=DL3018
 RUN apk add --no-cache --no-progress \
-        bash \
-        curl \
-        openssl \
-        git \
-        openssh-client-default \
-        jq \
-        gnupg \
-        pass \
-        rsync \
-        sshpass \
-        sudo \
-        unzip \
-        docker-cli \
-        sops \
+        bash~=5.3 \
+        curl~=8.22 \
+        openssl~=3.5 \
+        git~=2.54 \
+        openssh-client-default~=10.3 \
+        jq~=1.8 \
+        gnupg~=2.4 \
+        pass~=1.7 \
+        rsync~=3.5 \
+        sshpass~=1.10 \
+        sudo~=1.9 \
+        unzip~=6.0 \
+        docker-cli~=29.8 \
+        sops~=3.12 \
     && chmod 777 -R "$HOME" \
     && seq 500 1999 | awk '{printf "user:x:%d:%d::/home:/sbin/nologin\n",$1,$1}' >> /etc/passwd \
     && UV_PROJECT_ENVIRONMENT=/opt/venv uv sync --frozen --no-dev \
