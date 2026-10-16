@@ -32,6 +32,7 @@ RUN apk add --no-cache --no-progress \
         sudo \
         unzip \
         docker-cli \
+        sops \
     && chmod 777 -R "$HOME" \
     && seq 500 1999 | awk '{printf "user:x:%d:%d::/home:/sbin/nologin\n",$1,$1}' >> /etc/passwd \
     && UV_PROJECT_ENVIRONMENT=/opt/venv uv sync --frozen --no-dev \
