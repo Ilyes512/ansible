@@ -11,6 +11,12 @@ docker pull ghcr.io/specsnl/ansible:latest
 docker pull ghcr.io/specsnl/ansible/k8s:latest
 ```
 
+## Tools
+
+- `ansible`: Ansible with `ansible-lint`, `yamllint` and `molecule`, plus `sops`, `docker` (CLI), `git`, `jq`, `ssh`,
+  `rsync`, `sshpass`, `pass` and `uv`.
+- `ansible/k8s`: everything above, plus `kubectl`, `kubectx`, `kubens` and `helm`.
+
 ## Task commands
 
 Available [Task](https://taskfile.dev/#/) commands:
@@ -73,6 +79,18 @@ Quote:
 > kind is a tool for running local Kubernetes clusters using Docker container "nodes".
 
 For more info see: https://github.com/kubernetes-sigs/kind
+</details>
+
+`SOPS_AGE_KEY`: The age key `sops` uses to decrypt, e.g. for `group_vars/*.sops.yml` files loaded by the bundled
+`community.sops` collection (enable its vars plugin via `vars_plugins_enabled` in `ansible.cfg`).
+
+<details><summary>Example:</summary>
+
+```bash
+SOPS_AGE_KEY="op://Vault/Item/age key" \
+op run -- docker run --rm --tty --env SOPS_AGE_KEY --volume $(pwd):/workspace ghcr.io/specsnl/ansible:latest \
+ansible-playbook playbook.yml
+```
 </details>
 
 **Entrypoint hooks**: `docker-entrypoint.sh` sources every `/etc/docker-entrypoint.d/*.sh` before running the
