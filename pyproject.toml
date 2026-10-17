@@ -23,7 +23,7 @@ dependencies = [
     # needed for the UpCloud Ansible collection (upcloud.cloud)
     "upcloud-api>=2.9.0,<3",
     # misc tooling
-    "ansible-lint>=26.6.0",
+    "ansible-lint>=26.10.1",
     "yamllint>=1.38.0",
     "molecule>=26.6.0",
     "molecule-plugins[docker]>=26.9.28",
