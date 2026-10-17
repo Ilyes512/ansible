@@ -11,7 +11,7 @@ dependencies = [
     # openshift is a requirement of the k8s Ansible module
     "openshift>=0.13.2,<0.14",
     # needed for Ansible k8s module's validate support
-    "kubernetes-validate>=1.36.0,<2",
+    "kubernetes-validate>=1.37.0,<2",
     # needed for Ansible dns lookup support
     "dnspython>=2.8.0,<3",
     # needed for Ansible ipaddr functions
