@@ -188,7 +188,7 @@ requires-dist = [
     { name = "dnspython", specifier = ">=2.8.0,<3" },
     { name = "docker", specifier = ">=7.2.0,<8" },
     { name = "hvac", specifier = ">=2.4.0,<3" },
-    { name = "kubernetes-validate", specifier = ">=1.36.0,<2" },
+    { name = "kubernetes-validate", specifier = ">=1.37.0,<2" },
     { name = "molecule", specifier = ">=26.6.0" },
     { name = "molecule-plugins", extras = ["docker"], specifier = ">=26.9.28" },
     { name = "netaddr", specifier = ">=1.3.0,<2" },
@@ -804,7 +804,7 @@ wheels = [
 
 [[package]]
 name = "kubernetes-validate"
-version = "1.36.0"
+version = "1.37.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "importlib-resources" },
@@ -814,9 +814,9 @@ dependencies = [
     { name = "referencing" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b7/d2/ed9d3a2b5356a4b1b872639ee81d63e6adcd95727e93db44b3b46a47d3b9/kubernetes_validate-1.36.0.tar.gz", hash = "sha256:edbfd2db9e88b571029aa16ab1116c6502ad2b9628b6738dd39d639323f84715", size = 9850699, upload-time = "2026-05-18T08:08:52.289Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cd/14/e6b287f114457bd958cc3f520bd36a474e6a9ffc92a89aca8329da173eff/kubernetes_validate-1.37.0.tar.gz", hash = "sha256:09a26209d3e32d97ac13e6f81597c09316fe6f7473cdd4bd8db44075930de357", size = 10991105, upload-time = "2026-10-11T04:38:45.514Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/99/b7/c799b568a2b701103d6ee351d6f45af6c041b9e497dc0923645d617fb4cc/kubernetes_validate-1.36.0-py3-none-any.whl", hash = "sha256:fcafa2b657949a7cc7232dfb201c4d37e61b15e2f8b4936350b150be01ac5de5", size = 20186224, upload-time = "2026-05-18T08:08:48.76Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/50/104f3b5a41aba6737c5f2ffe76270398f3a7320dc4a4f3f88dfd5bc9af63/kubernetes_validate-1.37.0-py3-none-any.whl", hash = "sha256:85136d018a27b50ec7fc049d902bfa5193f5976807e6c0f408e3ab6fe078cad9", size = 22560767, upload-time = "2026-10-11T04:38:42.771Z" },
 ]
 
 [[package]]
